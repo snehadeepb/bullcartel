@@ -106,9 +106,9 @@ if __name__=='__main__':
                     p3.empty()
                       
                 else:
-                    time.sleep(1065*60)# calculate again market start time put min  there  8 hours  min * sec 
+                    time.sleep(5*60)# calculate again market start time put min  there  8 hours  min * sec 
             else:
-                time.sleep(42000*2) #saturday and sunday all the time sleep mode that is the calculated (how to go else part at which tiem  then monday start time )
+                time.sleep(3945*2) #saturday and sunday all the time sleep mode that is the calculated (how to go else part at which tiem  then monday start time )
         except:
             st.write("Error message is:",'some kind problem restart 10 min')
             time.sleep(10*60)
