@@ -83,7 +83,7 @@ if __name__=='__main__':
     while True:
         try:
             start_time='09.15 AM'
-            stop_time='09.30 PM'
+            stop_time='03.30 PM'
             current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
             today = datetime.today().strftime('%w') # DAY WITH NO AND SAT AND SUNDAY IS 60
             if today not in '60':
@@ -106,7 +106,7 @@ if __name__=='__main__':
                     p3.empty()
                       
                 else:
-                    time.sleep(5*60)# calculate again market start time put min  there  8 hours  min * sec 
+                    time.sleep(500*60)# calculate again market start time put min  there  8 hours  min * sec 
             else:
                 time.sleep(3945*2) #saturday and sunday all the time sleep mode that is the calculated (how to go else part at which tiem  then monday start time )
         except:
