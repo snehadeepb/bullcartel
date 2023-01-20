@@ -111,7 +111,7 @@ if __name__=='__main__':
                                           
 #                 else:
 #             else:
-                    time.sleep(42000*2) #saturday and sunday all the time sleep mode that is the calculated (how to go else part at which tiem  then monday start time )
+                    time.sleep(3*60) #saturday and sunday all the time sleep mode that is the calculated (how to go else part at which tiem  then monday start time )
         except:
             st.write("Error message is:",'some kind problem restart 10 min')
             time.sleep(10*60)
