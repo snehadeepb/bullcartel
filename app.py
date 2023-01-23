@@ -84,34 +84,33 @@ if __name__=='__main__':
              PUT % INCREASE MEANS MARKET GOES UP
              """)    
     while True:
-        try:
-            dataset,final=ploting()
-            p1=st.empty()
-            p2=st.empty()
-            p3=st.empty()
-            p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
-            p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1)) # row highlight
-            fig, ax = plt.subplots(figsize=(6, 2)) 
-            ax.plot(final['time'],final['pcr'])
-            ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
-            fig.autofmt_xdate(rotation=70)
-            p3.pyplot(fig)
-            time.sleep(3*60) # how to the start again code check upper condition min * sec
-            p1.empty() # then clean all data frame 
-            p2.empty()
-            p3.empty()
+        dataset,final=ploting()
+        p1=st.empty()
+        p2=st.empty()
+        p3=st.empty()
+        p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
+        p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1)) # row highlight
+        fig, ax = plt.subplots(figsize=(6, 2)) 
+        ax.plot(final['time'],final['pcr'])
+        ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
+        fig.autofmt_xdate(rotation=70)
+        p3.pyplot(fig)
+        time.sleep(3*60) # how to the start again code check upper condition min * sec
+        p1.empty() # then clean all data frame 
+        p2.empty()
+        p3.empty()
 
-            start_time='09.14 AM'
-            stop_time='06.05 PM'
-            current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
-            today = datetime.today().strftime('%w') # DAY WITH NO AND SAT AND SUNDAY IS 60
-            if today not in '60':
-                if current_time>stop_time:
-#                     current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
+#             start_time='09.14 AM'
+#             stop_time='06.05 PM'
+#             current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
+#             today = datetime.today().strftime('%w') # DAY WITH NO AND SAT AND SUNDAY IS 60
+#             if today not in '60':
+#                 if current_time>stop_time:
+# #                     current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
                                           
-#                 else:
-#             else:
-                       break #time.sleep(15*60) #saturday and sunday all the time sleep mode that is the calculated (how to go else part at which tiem  then monday start time )
-        except:
-            st.write("Error message is:",'some kind problem restart 10 min')
-            time.sleep(10*60)
+# #                 else:
+# #             else:
+#                        break #time.sleep(15*60) #saturday and sunday all the time sleep mode that is the calculated (how to go else part at which tiem  then monday start time )
+#         except:
+#             st.write("Error message is:",'some kind problem restart 10 min')
+#             time.sleep(10*60)
