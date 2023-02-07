@@ -47,6 +47,7 @@ def get_data():
     out=out.explode(list(out.columns)).reset_index(drop = True)
     out.fillna(0,inplace=True)
     x=out.astype(float).round(2)
+    x.sort_values("strike", axis = 0, ascending = True,inplace = True)
     return x
 def get_info(dataset):
     df= pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
