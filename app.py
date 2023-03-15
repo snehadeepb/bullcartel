@@ -7,13 +7,20 @@ from time import gmtime, strftime
 from IPython.display import clear_output 
 import matplotlib.pyplot as plt
 from pytz import timezone 
+import json
 
 def get_data():
     a=None
     last_prices=None
     while a==None and last_prices ==None:
         a=(nse_fno("BANKNIFTY"))
-        last_prices=round(nse_quote_ltp("BANKNIFTY"))
+#         last_prices=round(nse_quote_ltp("BANKNIFTY"))
+        try:
+            result = json.dumps(a)
+            last_prices=round(nse_quote_ltp("BANKNIFTY"))
+        except json.decoder.JSONDecodeError:
+            print('The file contains invalid JSON')  # 👇️ this runs
+            time.sleep(1*60)
     exp=list(set(a['expiryDates']))
     exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
     if last_prices%100>50:
