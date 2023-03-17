@@ -10,17 +10,18 @@ from pytz import timezone
 import json
 
 def get_data():
-    a=None
-    last_prices=None
+#     a=None
+#     last_prices=None
+    a =(nse_fno("BANKNIFTY"))
+    last_prices=round(nse_quote_ltp("BANKNIFTY"))
     while a==None and last_prices ==None:
-#         a=(nse_fno("BANKNIFTY"))
-#         last_prices=round(nse_quote_ltp("BANKNIFTY"))
-        try:
-            a = json.dumps(nse_fno("BANKNIFTY"))
-            last_prices=round(nse_quote_ltp("BANKNIFTY"))
-        except json.decoder.JSONDecodeError:
-            print('The file contains invalid JSON')  # 👇️ this runs
-            time.sleep(1*60)
+        a=(nse_fno("BANKNIFTY"))
+        last_prices=round(nse_quote_ltp("BANKNIFTY"))
+#         try:
+            
+#         except json.decoder.JSONDecodeError:
+#             print('The file contains invalid JSON')  # 👇️ this runs
+#             time.sleep(1*60)
     exp=list(set(a['expiryDates']))
     exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
     if last_prices%100>50:
