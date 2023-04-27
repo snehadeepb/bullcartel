@@ -5,3 +5,4 @@ matplotlib==3.5.1
 datetime==5.0
 pytz==2021.3
 ipython==7.0
+deta==1.1.0  
