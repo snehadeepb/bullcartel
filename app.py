@@ -98,8 +98,8 @@ if __name__=='__main__':
         p2=st.empty()
         p3=st.empty()
         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
-#         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1)) # row highlight
-        p2.write(final[:100])
+        p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1)) # row highlight
+#         p2.write(final[:100])
         fig, ax = plt.subplots(figsize=(6, 2)) 
         ax.plot(final['time'],final['pcr'])
         ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
