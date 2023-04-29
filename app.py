@@ -8,7 +8,7 @@ from IPython.display import clear_output
 import matplotlib.pyplot as plt
 from pytz import timezone 
 from deta import Deta 
-from st_aggrid import AgGrid
+# from st_aggrid import AgGrid
 
 def get_data():
     a=(nse_fno("BANKNIFTY"))
