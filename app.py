@@ -13,7 +13,7 @@ from deta import Deta
 def get_data():
     a=(nse_fno("BANKNIFTY"))
 #     last_prices=round(nse_quote_ltp("BANKNIFTY"))
-    global open1,last_prices,high,low
+    global open1,last_prices,high,low,strike
     price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
     open1=price['openPrice']
     last_prices=round(price['lastPrice'])
@@ -58,21 +58,21 @@ def get_data():
     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
     return x
 def get_info(dataset):
-    df= pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
+#     df= pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
     value= dataset['put change op'].sum() - dataset['call change op'].sum()
     pcr= dataset['put change op'].sum()/dataset['call change op'].sum()
     cal_per= dataset['% change op'].mean()
     put_per= dataset['% change op put'].mean()
     new_row={'time':datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p'),'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': round(open1),'high':round(high),'low':round(low),'close':round(last_prices)}
-    df = df.append(new_row,ignore_index=True, verify_integrity=False, sort=None)
-    
+#     df = df.append(new_row,ignore_index=True, verify_integrity=False, sort=None)
+    pcr_dataset=pd.DataFrame(new_row,index=[0])
     deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
     deta = Deta(deta_key)
     db = deta.Base("bullcartal1")
     def insert_user(row):
          return db.put(row)
     insert_user(new_row)
-    return df 
+    return pcr_dataset 
 
 def ploting():
         try:
