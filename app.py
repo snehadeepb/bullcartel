@@ -1,10 +1,11 @@
 from nsepython import *
 import seaborn as sns
 import pandas as pd
+import numpy as np
 import streamlit as st
 from datetime import datetime
 from time import gmtime, strftime
-from IPython.display import clear_output 
+# from IPython.display import clear_output 
 import matplotlib.pyplot as plt
 from pytz import timezone 
 from deta import Deta 
@@ -81,7 +82,7 @@ def ploting():
              df = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
         dataset= get_data()
         main= get_info(dataset)
-        main1=main[['value', 'pcr', 'cal_per','put_per','time']]
+        main1=main[['value', 'pcr', 'cal_per','put_per','time']].to_numpy()
 #         final =final.append(main1,ignore_index=True, verify_integrity=False, sort=None)
         final=pd.concat([final,main1],ignore_index=True)
 #         deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
