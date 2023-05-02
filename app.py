@@ -65,6 +65,7 @@ def get_info(dataset):
     put_per= dataset['% change op put'].mean()
     new_row={'time':datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p'),'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': round(open1),'high':round(high),'low':round(low),'close':round(last_prices)}
     df = df.append(new_row,ignore_index=True, verify_integrity=False, sort=None)
+    
     deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
     deta = Deta(deta_key)
     db = deta.Base("bullcartal1")
@@ -81,7 +82,8 @@ def ploting():
         dataset= get_data()
         main= get_info(dataset)
         main1=main[['value', 'pcr', 'cal_per','put_per','time']]
-        final =final.append(main1,ignore_index=True, verify_integrity=False, sort=None)
+#         final =final.append(main1,ignore_index=True, verify_integrity=False, sort=None)
+        final=pd.concat([final,main1],ignore_index=True)
 #         deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
 #         deta = Deta(deta_key)
 #         db = deta.Base("bullcartal1")
