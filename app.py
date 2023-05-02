@@ -1,7 +1,7 @@
 from nsepython import *
 import seaborn as sns
 import pandas as pd
-import numpy as np
+# import numpy as np
 import streamlit as st
 from datetime import datetime
 from time import gmtime, strftime
