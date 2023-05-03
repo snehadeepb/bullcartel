@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 from pytz import timezone 
 from deta import Deta 
 # from st_aggrid import AgGrid
+import warnings
+warnings.filterwarnings("ignore")
 
 def get_data():
     a=(nse_fno("BANKNIFTY"))
