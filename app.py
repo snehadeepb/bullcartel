@@ -85,6 +85,7 @@ def ploting():
         main1=main[['value', 'pcr', 'cal_per','put_per','time']]
 #         final =final.append(main1,ignore_index=True, verify_integrity=False, sort=None)
         final=pd.concat([final,main1],ignore_index=True)
+        final=np.array(final)
 #         deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
 #         deta = Deta(deta_key)
 #         db = deta.Base("bullcartal1")
