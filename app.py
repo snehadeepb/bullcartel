@@ -120,8 +120,8 @@ if __name__=='__main__':
         p2=st.empty()
         p3=st.empty()
         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
-        final=np.array(final,column=['value', 'pcr', 'cal_per','put_per','time'])
-#         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1,)) # row highlight
+#         final=np.array(final,column=['value', 'pcr', 'cal_per','put_per','time'])
+        p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1,)) # row highlight
 #         p2.AgGrid(final,height=500,fit_columns_on_grid_load=True)
         p2.write(final[:100])
         fig, ax = plt.subplots(figsize=(6, 2)) 
