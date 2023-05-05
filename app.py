@@ -87,7 +87,7 @@ def ploting():
         main1=main[['value', 'pcr', 'cal_per','put_per','time']]
 #         final =final.append(main1,ignore_index=True, verify_integrity=False, sort=None)
         final=pd.concat([final,main1],ignore_index=True)
-        final=np.array(final)
+#         final=np.array(final)
 #         deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
 #         deta = Deta(deta_key)
 #         db = deta.Base("bullcartal1")
@@ -122,8 +122,10 @@ if __name__=='__main__':
 #         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
 # #         final=np.array(final,column=['value', 'pcr', 'cal_per','put_per','time'])
 #         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1,)) # row highlight
+
         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
-        p2.dataframe(final,columns=['value', 'pcr', 'cal_per','put_per','time']) # row highlight
+        p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1)) 
+#         p2.dataframe(final,columns=['value', 'pcr', 'cal_per','put_per','time']) # row highlight
 #         p2.write(final[:100])
 #         p2.AgGrid(final,height=500,fit_columns_on_grid_load=True)
 #         p2.write(final[:100])
