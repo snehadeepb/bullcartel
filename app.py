@@ -12,13 +12,14 @@ from deta import Deta
 # from st_aggrid import AgGrid
 import warnings
 warnings.filterwarnings("ignore")
-from pandas_datareader import data as pdr
+import pandas_datareader as pdr
 import yfinance as yf  
 
 def get_data():
     a=(nse_fno("BANKNIFTY"))
 #     last_prices=round(nse_quote_ltp("BANKNIFTY"))
     global open1,last_prices,high,low,strike
+    yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
     live_data =nse_df.tail(1)
     open1=live_data['Open'][0].astype(int).round()
