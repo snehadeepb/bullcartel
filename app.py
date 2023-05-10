@@ -14,6 +14,9 @@ import warnings
 warnings.filterwarnings("ignore")
 import pandas_datareader as pdr
 import yfinance as yf  
+!ipenv shell
+!pip install --upgrade streamlit
+# streamlit version
 
 def get_data():
     a=(nse_fno("BANKNIFTY"))
