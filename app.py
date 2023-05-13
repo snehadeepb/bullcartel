@@ -18,7 +18,10 @@ import yfinance as yf
 
 def get_data():
     a=(nse_fno("BANKNIFTY"))
-    a = json.dumps(a)
+#     a = json.dumps(a)
+    json_string = json.dumps(a)
+    json_value=json.loads(json_string)
+    a=json_value
 #     last_prices=round(nse_quote_ltp("BANKNIFTY"))
     global open1,last_prices,high,low,strike
     
