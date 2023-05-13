@@ -15,7 +15,6 @@ import warnings
 warnings.filterwarnings("ignore")
 import pandas_datareader as pdr
 import yfinance as yf  
-import skimage
 
 def get_data():
     a=(nse_fno("BANKNIFTY"))
