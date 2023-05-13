@@ -23,23 +23,23 @@ def get_data():
 #     last_prices=round(nse_quote_ltp("BANKNIFTY"))
     global open1,last_prices,high,low,strike
     
+#     yf.pdr_override()
+#     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
     
-    nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
-    yf.pdr_override()
-    live_data =nse_df.tail(1)
-    open1=live_data['Open'][0].astype(int).round()
-    high =live_data['High'][0].astype(int).round()
-    low=live_data['Low'][0].astype(int).round()
-    last_prices=live_data['Close'][0].astype(int).round()
+#     live_data =nse_df.tail(1)
+#     open1=live_data['Open'][0].astype(int).round()
+#     high =live_data['High'][0].astype(int).round()
+#     low=live_data['Low'][0].astype(int).round()
+#     last_prices=live_data['Close'][0].astype(int).round()
 #     print(open,high, low , close)
 #     print(live_data)
     
-#     price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
+    price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
     
-#     open1=price['openPrice']
-#     last_prices=round(price['lastPrice'])
-#     high=price['highPrice']
-#     low=price['lowPrice']
+    open1=price['openPrice']
+    last_prices=round(price['lastPrice'])
+    high=price['highPrice']
+    low=price['lowPrice']
 #     print(open1,high,low,last_prices)
     
     exp=list(set(a['expiryDates']))
