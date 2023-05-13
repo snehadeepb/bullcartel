@@ -17,6 +17,11 @@ import yfinance as yf
 
 
 def get_data():
+    dummy_data = [[-7003.000000, 286.110000, -19.540000, 43600.000000, 36704.000000, 308.290000, 676.570000]]
+
+    x = pd.DataFrame(dummy_data,columns = ['a', 'b', 'c' ,'d', 'e', 'f','g'])
+    return x
+
     a=(nse_fno("BANKNIFTY"))
 #     a = json.dumps(a)
     json_string = json.dumps(a)
@@ -47,45 +52,44 @@ def get_data():
 # #     low=price['lowPrice']
 # #     print(open1,high,low,last_prices)
     
-#     exp=list(set(a['expiryDates']))
-#     exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
-#     if last_prices%100>50:
-#         x=(last_prices-last_prices%100+100)
-#         strike=[x-200,x-100,x,x+100,x+200]
-#     elif last_prices%100<50:
-#         x=(last_prices-last_prices%100)
-#         strike=[x-200,x-100,x,x+100,x+200]
-#     d={'call change op':[],
-#         'call vwap':[],
-#         '% change op':[],
-#         'strike':[],
-#         'put change op':[],
-#         'put vwap':[],
-#         '% change op put':[]
-#         }
-#     for i in a['stocks']:
-#         for sp in strike: 
-#             if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
-#                 d['strike'].append(sp)
-#                 d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-#                 d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-#                 d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+    exp=list(set(a['expiryDates']))
+    exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
+    if last_prices%100>50:
+        x=(last_prices-last_prices%100+100)
+        strike=[x-200,x-100,x,x+100,x+200]
+    elif last_prices%100<50:
+        x=(last_prices-last_prices%100)
+        strike=[x-200,x-100,x,x+100,x+200]
+    d={'call change op':[],
+        'call vwap':[],
+        '% change op':[],
+        'strike':[],
+        'put change op':[],
+        'put vwap':[],
+        '% change op put':[]
+        }
+    for i in a['stocks']:
+        for sp in strike: 
+            if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
+                d['strike'].append(sp)
+                d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+                d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+                d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
 
-#             elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
-#                 d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-#                 d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-#                 d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+            elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
+                d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+                d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+                d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
 
-#     out=pd.json_normalize(d)
+    out=pd.json_normalize(d)
     
-#     out=out.explode(list(out.columns)).reset_index(drop = True)
-#     out.fillna(0,inplace=True)
-#     x=out.astype(float).round(2)
-#     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
-    dummy_data = [[-7003.000000, 286.110000, -19.540000, 43600.000000, 36704.000000, 308.290000, 676.570000]]
-    
-    x = pd.DataFrame(dummy_data,columns = ['a', 'b', 'c' ,'d', 'e', 'f','g'])
+    out=out.explode(list(out.columns)).reset_index(drop = True)
+    out.fillna(0,inplace=True)
+    x=out.astype(float).round(2)
+    x.sort_values("strike", axis = 0, ascending = True,inplace = True)
     return x
+    
+    
 def get_info(dataset):
 #     df= pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
     value= dataset['put change op'].sum() - dataset['call change op'].sum()
