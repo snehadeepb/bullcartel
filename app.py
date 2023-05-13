@@ -126,7 +126,7 @@ final = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per','time'])
 if __name__=='__main__':
     
     st.title('WELCOME BULLS CARTEL')
-    st.markdown('streamlit version:- ',st.__version__)
+#     st.markdown('streamlit version:- ',st.__version__)
     today_date =strftime("%d %b %Y", gmtime()),datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
     st.markdown(f"as at {today_date}")
     option= st.selectbox(
