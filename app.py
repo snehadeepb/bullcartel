@@ -23,8 +23,9 @@ def get_data():
 #     last_prices=round(nse_quote_ltp("BANKNIFTY"))
     global open1,last_prices,high,low,strike
     
-    yf.pdr_override()
+    
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
+    yf.pdr_override()
     live_data =nse_df.tail(1)
     open1=live_data['Open'][0].astype(int).round()
     high =live_data['High'][0].astype(int).round()
