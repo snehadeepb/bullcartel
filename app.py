@@ -17,10 +17,10 @@ import yfinance as yf
 
 
 def get_data():
-    dummy_data = [[-7003.000000, 286.110000, -19.540000, 43600.000000, 36704.000000, 308.290000, 676.570000]]
+#     dummy_data = [[-7003.000000, 286.110000, -19.540000, 43600.000000, 36704.000000, 308.290000, 676.570000]]
 
-    x = pd.DataFrame(dummy_data,columns = ['a', 'b', 'c' ,'d', 'e', 'f','g'])
-    return x
+#     x = pd.DataFrame(dummy_data,columns = ['a', 'b', 'c' ,'d', 'e', 'f','g'])
+    return nse_fno
 
     a=(nse_fno("BANKNIFTY"))
 #     a = json.dumps(a)
