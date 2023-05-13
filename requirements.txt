@@ -10,4 +10,3 @@ numpy>=1.21.5
 yfinance>=0.2.18
 pandas_datareader>=0.10.0
 streamlit>=1.16.0
-skimage>=0.19.2
