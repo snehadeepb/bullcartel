@@ -19,6 +19,7 @@ def get_data():
     a=(nse_fno("BANKNIFTY"))
 #     last_prices=round(nse_quote_ltp("BANKNIFTY"))
     global open1,last_prices,high,low,strike
+    
     yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
     live_data =nse_df.tail(1)
@@ -26,9 +27,11 @@ def get_data():
     high =live_data['High'][0].astype(int).round()
     low=live_data['Low'][0].astype(int).round()
     last_prices=live_data['Close'][0].astype(int).round()
-    
+#     print(open,high, low , close)
+#     print(live_data)
     
 #     price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
+    
 #     open1=price['openPrice']
 #     last_prices=round(price['lastPrice'])
 #     high=price['highPrice']
@@ -149,3 +152,4 @@ if __name__=='__main__':
         p1.empty() # then clean all data frame 
         p2.empty()
         p3.empty()
+            
