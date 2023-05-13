@@ -13,6 +13,8 @@ import warnings
 warnings.filterwarnings("ignore")
 import pandas_datareader as pdr
 import yfinance as yf  
+print('streamlit version:- 'st.__version__)
+
 
 def get_data():
     a=(nse_fno("BANKNIFTY"))
