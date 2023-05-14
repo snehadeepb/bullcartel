@@ -1,4 +1,5 @@
 from nsepython import nse_fno
+print("HELLO")
 print(nse_fno('''BANKNIFTY'''))
 #from nsepython import *
 # import seaborn as sns
