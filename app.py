@@ -1,6 +1,6 @@
-from nsepython import nse_fno
+# from nsepython import nse_fno
 print("HELLO")
-print(nse_fno('''BANKNIFTY'''))
+# print(nse_fno('''BANKNIFTY'''))
 #from nsepython import *
 # import seaborn as sns
 # import pandas as pd
