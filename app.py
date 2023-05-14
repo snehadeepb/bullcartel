@@ -4,12 +4,12 @@ import yfinance as yf
 from pandas_datareader import data as pdr 
 # nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m') 
 # from yahoo_finance import Share
-ticker = yf.download("RELIANCE.NS", start= '2022-01-01', end = '2023-01-01')
-
+# ticker = yf.download("RELIANCE.NS", start= '2022-01-01', end = '2023-01-01')
+a=nse_fno('BANKNIFTY')
 
 # yf.pdr_override()
 # live_data =nse_df.tail(1)
-st.markdown(ticker)
+st.markdown(a)
 
 # print(nse_fno('''BANKNIFTY'''))
 #from nsepython import *
