@@ -28,7 +28,7 @@ def get_data():
     
     yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
-    
+    global open1,last_prices,high,low,strike
 #     json_string = json.dumps(nse_df)
 #     json_value=json.loads(json_string)
 #     nse_df=json_value
@@ -37,7 +37,7 @@ def get_data():
     high =live_data['High'][0].astype(int).round()
     low=live_data['Low'][0].astype(int).round()
     last_prices=live_data['Close'][0].astype(int).round()
-    global open1,last_prices,high,low,strike
+    
 #     print(open1,high, low , last_prices)
 #     print(live_data)
     
