@@ -22,7 +22,7 @@ def get_data():
 #     x = pd.DataFrame(dummy_data,columns = ['a', 'b', 'c' ,'d', 'e', 'f','g'])
 #     return nse_fno
 
-    a=(nse_fno("BANKNIFTY"))
+#     a=(nse_fno("BANKNIFTY"))
 #     a = json.dumps(a)
 #     json_string = json.dumps(a)
 #     json_value=json.loads(json_string)
@@ -68,26 +68,28 @@ def get_data():
         'put vwap':[],
         '% change op put':[]
         }
-    for i in a['stocks']:
-        for sp in strike: 
-            if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
-                d['strike'].append(sp)
-                d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-                d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-                d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+#     print(a)
+#     for i in a['stocks']:
+#         for sp in strike: 
+#             if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
+#                 d['strike'].append(sp)
+#                 d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+#                 d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+#                 d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
 
-            elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
-                d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-                d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-                d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+#             elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
+#                 d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+#                 d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+#                 d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
 
-    out=pd.json_normalize(d)
+#     out=pd.json_normalize(d)
     
-    out=out.explode(list(out.columns)).reset_index(drop = True)
-    out.fillna(0,inplace=True)
-    x=out.astype(float).round(2)
-    x.sort_values("strike", axis = 0, ascending = True,inplace = True)
-    return x
+#     out=out.explode(list(out.columns)).reset_index(drop = True)
+#     out.fillna(0,inplace=True)
+#     x=out.astype(float).round(2)
+#     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
+#     return 
+      print("hii")
     
     
 def get_info(dataset):
