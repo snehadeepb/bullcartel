@@ -1,7 +1,11 @@
 from nsepython import nse_fno
 import streamlit as st
-
-st.markdown(nse_fno('BANKNIFTY'))
+import yfinance as yf
+from pandas_datareader import data as pdr 
+nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
+yf.pdr_override()
+live_data =nse_df.tail(1)
+st.markdown(live_data)
 
 # print(nse_fno('''BANKNIFTY'''))
 #from nsepython import *
