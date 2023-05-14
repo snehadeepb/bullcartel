@@ -23,7 +23,7 @@ def get_data():
 #     json_string = json.dumps(a)
 #     json_value=json.loads(json_string)
 #     a=json_value
-    last_prices=round(nse_quote_ltp("BANKNIFTY"))
+#     last_prices=round(nse_quote_ltp("BANKNIFTY"))
     
     
     yf.pdr_override()
@@ -87,7 +87,6 @@ def get_data():
     x=out.astype(float).round(2)
     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
     return x
-#       print("hii")
     
     
 def get_info(dataset):
