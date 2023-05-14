@@ -1,134 +1,166 @@
-from nsepython import *
-import streamlit as st
-import yfinance as yf
-from pandas_datareader import data as pdr 
-# # nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m') 
-# # from yahoo_finance import Share
-# ticker = yf.download("RELIANCE.NS", start= '2022-01-01', end = '2023-01-01')
-# nse_fno.pdr_override()
-# a=nse_fno('BANKNIFTY')
-a=(get_bulkdeals())
-# download dataframe
-# nse_df = yf.download("^NSEBANK", period='1d', interval='5m')
-# # yf.pdr_override()
-# live_data =nse_df.tail(1)
-# live_data
-st.markdown(a)
-
-# print(nse_fno('''BANKNIFTY'''))
-#from nsepython import *
-# import seaborn as sns
-# import pandas as pd
-# import streamlit as st
-# from datetime import datetime
-# from time import gmtime, strftime
-# # from IPython.display import clear_output 
-# import matplotlib.pyplot as plt
-# from pytz import timezone 
-# from deta import Deta 
-# import json
-# import warnings
-# warnings.filterwarnings("ignore")
-# import pandas_datareader as pdr
-# import yfinance as yf  
+from nsepython import *      #nsepython==0.0.972
+import seaborn as sns
+import pandas as pd     #1.5.2
+import numpy as np
+import streamlit as st   #1.22.0
+from datetime import datetime    #5.0
+from time import gmtime, strftime
+# from IPython.display import clear_output 
+import matplotlib.pyplot as plt
+from pytz import timezone   #2023.3
+from deta import Deta       #1.1.0
+# from st_aggrid import AgGrid
+import warnings
+warnings.filterwarnings("ignore")
+from pandas_datareader import data as pdr #0.10.0
+import yfinance as yf  #0.2.18
 
 
-# def get_data():
-#     a=None
-#     last_prices=None
-#     while a==None and last_prices ==None:
-#         a=nse_fno('BANKNIFTY')
-#         last_prices=round(nse_quote_ltp('BANKNIFTY'))
-#         time.sleep(30)
-#     exp=list(set(a['expiryDates']))
-#     exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
-#     if last_prices%100>50:
-#         x=(last_prices-last_prices%100+100)
-#         strike=[x-200,x-100,x,x+100,x+200]
-#     elif last_prices%100<=50:
-#         x=(last_prices-last_prices%100)
-#         strike=[x-200,x-100,x,x+100,x+200]
-#     d={'call change op':[],
-#         'call vwap':[],
-#         '% change op':[],
-#         'strike':[],
-#         'put change op':[],
-#         'put vwap':[],
-#         '% change op put':[]
-#         }
-#     for i in a['stocks']:
-#         for sp in strike: 
-#             if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
-#                 d['strike'].append(sp)
-#                 d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-#                 d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-#                 d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+def get_data():
 
-#             elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
-#                 d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-#                 d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-#                 d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+    a=(nse_fno("BANKNIFTY"))
+#     a = json.dumps(a)
+#     json_string = json.dumps(a)
+#     json_value=json.loads(json_string)
+#     a=json_value
+#     last_prices=round(nse_quote_ltp("BANKNIFTY"))
+    
+    
+    yf.pdr_override()
+    nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
+    global open1,last_prices,high,low,strike
+    
+#     json_string = json.dumps(nse_df)
+#     json_value=json.loads(json_string)
+#     nse_df=json_value
 
-#     out=pd.json_normalize(d)
-#     out=out.explode(list(out.columns)).reset_index(drop = True)
-#     out.fillna(0,inplace=True)
-#     x=out.astype(float).round(2)
-#     return x
-# def get_info(dataset):
+    live_data =nse_df.tail(1)
+    open1=live_data['Open'][0].astype(int).round()
+    high =live_data['High'][0].astype(int).round()
+    low=live_data['Low'][0].astype(int).round()
+    last_prices=live_data['Close'][0].astype(int).round()
+    
+#     print(open1,high, low , last_prices)
+#     print(live_data)
+    
+#     price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
+    
+#     open1=price['openPrice']
+#     last_prices=round(price['lastPrice'])
+#     high=price['highPrice']
+#     low=price['lowPrice']
+# #     print(open1,high,low,last_prices)
+    
+    exp=list(set(a['expiryDates']))
+    exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
+    if last_prices%100>50:
+        x=(last_prices-last_prices%100+100)
+        strike=[x-200,x-100,x,x+100,x+200]
+    elif last_prices%100<50:
+        x=(last_prices-last_prices%100)
+        strike=[x-200,x-100,x,x+100,x+200]
+    d={'call change op':[],
+        'call vwap':[],
+        '% change op':[],
+        'strike':[],
+        'put change op':[],
+        'put vwap':[],
+        '% change op put':[]
+        }
+    print("a")
+#     print(a)
+    for i in a['stocks']:
+        for sp in strike: 
+            if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
+                d['strike'].append(sp)
+                d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+                d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+                d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+
+            elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
+                d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+                d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+                d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+
+    out=pd.json_normalize(d)
+    
+    out=out.explode(list(out.columns)).reset_index(drop = True)
+    out.fillna(0,inplace=True)
+    x=out.astype(float).round(2)
+    x.sort_values("strike", axis = 0, ascending = True,inplace = True)
+    return x
+    
+    
+def get_info(dataset):
 #     df= pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
-#     value= dataset['put change op'].sum() - dataset['call change op'].sum()
-#     pcr= dataset['put change op'].sum()/dataset['call change op'].sum()
-#     cal_per= dataset['% change op'].mean()
-#     put_per= dataset['% change op put'].mean()
-#     new_row={'time':datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p'),'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2)}
+    value= dataset['put change op'].sum() - dataset['call change op'].sum()
+    pcr= dataset['put change op'].sum()/dataset['call change op'].sum()
+    cal_per= dataset['% change op'].mean()
+    put_per= dataset['% change op put'].mean()
+    new_row={'time':datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p'),'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': round(open1),'high':round(high),'low':round(low),'close':round(last_prices)}
 #     df = df.append(new_row,ignore_index=True, verify_integrity=False, sort=None)
-#     return df  
-# def ploting():
-#         try:
-#             global final
-#         except:
-#              df = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
-#         dataset= get_data()
-#         main= get_info(dataset)
-#         final =final.append(main,ignore_index=True, verify_integrity=False, sort=None)
-#         return dataset,final
+    pcr_dataset=pd.DataFrame(new_row,index=[0])
+    deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
+    deta = Deta(deta_key)
+    db = deta.Base("bullcartal1")
+    def insert_user(row):
+         return db.put(row)
+    insert_user(new_row)
+    return pcr_dataset 
 
-# final = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per','time'])
-    
+def ploting():
+        try:
+            global final
+        except:
+             df = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per'])
+        dataset= get_data()
+        main= get_info(dataset)
+        main1=main[['value', 'pcr', 'cal_per','put_per','time']]
+#         final =final.append(main1,ignore_index=True, verify_integrity=False, sort=None)
+        final=pd.concat([final,main1],ignore_index=True)
+        
+        return dataset,final
 
-# if __name__=='__main__':
+final = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per','time'])
+
+
+if __name__=='__main__':
     
-#     st.title('WELCOME BULLS CARTEL')
-#     today_date =strftime("%d %b %Y", gmtime()),datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
-#     st.markdown(f"as at {today_date}")
-#     option= st.selectbox(
-#     'How would you like to be contacted?',
-#     ('5', '10', '15')) 
-#     st.write('You selected:', option)
-#     st.header('Important Information')
-#     st.markdown(""" CALL % INCREASE MEANS MARKET GOES DOWN  
-#              PUT % INCREASE MEANS MARKET GOES UP
-#              """)    
-# while True:
-# #         try:
-# #             start_time='09.14 AM'
-# #             stop_time='07.30 PM'
-# #             current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
-# #             st.write(current_time,stop_time)
-# #             today = datetime.today().strftime('%w') # DAY WITH NO AND SAT AND SUNDAY IS 60
-#             dataset,final=ploting()
-#             p1=st.empty()
-#             p2=st.empty()
-#             p3=st.empty()
-#             p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
-#             p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1)) # row highlight
-#             fig, ax = plt.subplots(figsize=(6, 2)) 
-#             ax.plot(final['time'],final['pcr'])
-#             ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
-#             fig.autofmt_xdate(rotation=70)
-#             p3.pyplot(fig)
-#             time.sleep(3*60) # how to the start again code check upper condition min * sec
-#             p1.empty() # then clean all data frame 
-#             p2.empty()
-#             p3.empty()
-            
+    st.title('WELCOME BULLS CARTEL')
+#     st.markdown('streamlit version:- ',st.__version__)
+    today_date =strftime("%d %b %Y", gmtime()),datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
+    st.markdown(f"as at {today_date}")
+    option= st.selectbox(
+    'How would you like to be contacted?',
+    ('5', '10', '15')) 
+    st.write('You selected:', option)
+    st.header('Important Information')
+    st.markdown(""" CALL % INCREASE MEANS MARKET GOES DOWN  
+             PUT % INCREASE MEANS MARKET GOES UP
+             """)    
+    while True:
+        current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
+        
+        dataset,final=ploting()
+        p1=st.empty()
+        p2=st.empty()
+        p3=st.empty()
+#         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
+# #         final=np.array(final,column=['value', 'pcr', 'cal_per','put_per','time'])
+#         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1,)) # row highlight
+
+        p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
+#         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1)) 
+#         p2.dataframe(final,columns=['value', 'pcr', 'cal_per','put_per','time']) # row highlight
+#         p2.write(final[:100])
+#         p2.AgGrid(final,height=500,fit_columns_on_grid_load=True)
+        p2.write(final[:100])
+        fig, ax = plt.subplots(figsize=(6, 2)) 
+        ax.plot(final['time'],final['pcr'])
+        ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
+        fig.autofmt_xdate(rotation=70)
+        p3.pyplot(fig)
+        time.sleep(3*60) # how to the start again code check upper condition min * sec
+        p1.empty() # then clean all data frame 
+        p2.empty()
+        p3.empty()
