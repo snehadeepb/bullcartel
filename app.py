@@ -19,7 +19,7 @@ def get_data():
     a=None
     last_prices=None
     while a==None and last_prices ==None:
-        a=(nse_fno("BANKNIFTY"))
+        a=nse_fno("BANKNIFTY")
         last_prices=round(nse_quote_ltp("BANKNIFTY"))
         time.sleep(30)
     exp=list(set(a['expiryDates']))
