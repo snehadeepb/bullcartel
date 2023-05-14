@@ -52,22 +52,23 @@ def get_data():
 #     low=price['lowPrice']
 # #     print(open1,high,low,last_prices)
     
-    exp=list(set(a['expiryDates']))
-    exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
-    if last_prices%100>50:
-        x=(last_prices-last_prices%100+100)
-        strike=[x-200,x-100,x,x+100,x+200]
-    elif last_prices%100<50:
-        x=(last_prices-last_prices%100)
-        strike=[x-200,x-100,x,x+100,x+200]
-    d={'call change op':[],
-        'call vwap':[],
-        '% change op':[],
-        'strike':[],
-        'put change op':[],
-        'put vwap':[],
-        '% change op put':[]
-        }
+#     exp=list(set(a['expiryDates']))
+#     exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
+#     if last_prices%100>50:
+#         x=(last_prices-last_prices%100+100)
+#         strike=[x-200,x-100,x,x+100,x+200]
+#     elif last_prices%100<50:
+#         x=(last_prices-last_prices%100)
+#         strike=[x-200,x-100,x,x+100,x+200]
+#     d={'call change op':[],
+#         'call vwap':[],
+#         '% change op':[],
+#         'strike':[],
+#         'put change op':[],
+#         'put vwap':[],
+#         '% change op put':[]
+#         }
+    print("a")
 #     print(a)
 #     for i in a['stocks']:
 #         for sp in strike: 
@@ -89,7 +90,7 @@ def get_data():
 #     x=out.astype(float).round(2)
 #     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
 #     return 
-      print("hii")
+#       print("hii")
     
     
 def get_info(dataset):
