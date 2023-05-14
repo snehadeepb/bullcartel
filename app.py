@@ -1,4 +1,4 @@
-from nsepython import nse_fno
+from nsepython import *
 import streamlit as st
 import yfinance as yf
 from pandas_datareader import data as pdr 
