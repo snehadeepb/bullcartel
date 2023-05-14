@@ -17,31 +17,27 @@ import yfinance as yf
 
 
 def get_data():
-#     dummy_data = [[-7003.000000, 286.110000, -19.540000, 43600.000000, 36704.000000, 308.290000, 676.570000]]
 
-#     x = pd.DataFrame(dummy_data,columns = ['a', 'b', 'c' ,'d', 'e', 'f','g'])
-#     return nse_fno
-
-#     a=(nse_fno("BANKNIFTY"))
+    a=(nse_fno("BANKNIFTY"))
 #     a = json.dumps(a)
 #     json_string = json.dumps(a)
 #     json_value=json.loads(json_string)
 #     a=json_value
-#     last_prices=round(nse_quote_ltp("BANKNIFTY"))
-#     global open1,last_prices,high,low,strike
+    last_prices=round(nse_quote_ltp("BANKNIFTY"))
+    global open1,last_prices,high,low,strike
     
     yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
     
-    json_string = json.dumps(nse_df)
-    json_value=json.loads(json_string)
-    nse_df=json_value
+#     json_string = json.dumps(nse_df)
+#     json_value=json.loads(json_string)
+#     nse_df=json_value
     live_data =nse_df.tail(1)
     open1=live_data['Open'][0].astype(int).round()
     high =live_data['High'][0].astype(int).round()
     low=live_data['Low'][0].astype(int).round()
     last_prices=live_data['Close'][0].astype(int).round()
-#     print(open,high, low , close)
+#     print(open1,high, low , last_prices)
 #     print(live_data)
     
 #     price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
@@ -52,44 +48,44 @@ def get_data():
 #     low=price['lowPrice']
 # #     print(open1,high,low,last_prices)
     
-#     exp=list(set(a['expiryDates']))
-#     exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
-#     if last_prices%100>50:
-#         x=(last_prices-last_prices%100+100)
-#         strike=[x-200,x-100,x,x+100,x+200]
-#     elif last_prices%100<50:
-#         x=(last_prices-last_prices%100)
-#         strike=[x-200,x-100,x,x+100,x+200]
-#     d={'call change op':[],
-#         'call vwap':[],
-#         '% change op':[],
-#         'strike':[],
-#         'put change op':[],
-#         'put vwap':[],
-#         '% change op put':[]
-#         }
+    exp=list(set(a['expiryDates']))
+    exp.sort(key = lambda date: datetime.strptime(date, '%d-%b-%Y')) 
+    if last_prices%100>50:
+        x=(last_prices-last_prices%100+100)
+        strike=[x-200,x-100,x,x+100,x+200]
+    elif last_prices%100<50:
+        x=(last_prices-last_prices%100)
+        strike=[x-200,x-100,x,x+100,x+200]
+    d={'call change op':[],
+        'call vwap':[],
+        '% change op':[],
+        'strike':[],
+        'put change op':[],
+        'put vwap':[],
+        '% change op put':[]
+        }
     print("a")
 #     print(a)
-#     for i in a['stocks']:
-#         for sp in strike: 
-#             if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
-#                 d['strike'].append(sp)
-#                 d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-#                 d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-#                 d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+    for i in a['stocks']:
+        for sp in strike: 
+            if i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Call' and i['metadata']['strikePrice']==sp:
+                d['strike'].append(sp)
+                d['call change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+                d['% change op'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+                d['call vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
 
-#             elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
-#                 d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
-#                 d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
-#                 d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
+            elif i['metadata']['expiryDate']==exp[0] and i['metadata']['optionType']=='Put' and i['metadata']['strikePrice']==sp:
+                d['put change op'].append(i['marketDeptOrderBook']['tradeInfo']['changeinOpenInterest'])
+                d['% change op put'].append(i['marketDeptOrderBook']['tradeInfo']['pchangeinOpenInterest'])
+                d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
 
-#     out=pd.json_normalize(d)
+    out=pd.json_normalize(d)
     
-#     out=out.explode(list(out.columns)).reset_index(drop = True)
-#     out.fillna(0,inplace=True)
-#     x=out.astype(float).round(2)
-#     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
-#     return 
+    out=out.explode(list(out.columns)).reset_index(drop = True)
+    out.fillna(0,inplace=True)
+    x=out.astype(float).round(2)
+    x.sort_values("strike", axis = 0, ascending = True,inplace = True)
+    return x
 #       print("hii")
     
     
