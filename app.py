@@ -20,36 +20,36 @@ def get_data():
 #     dummy_data = [[-7003.000000, 286.110000, -19.540000, 43600.000000, 36704.000000, 308.290000, 676.570000]]
 
 #     x = pd.DataFrame(dummy_data,columns = ['a', 'b', 'c' ,'d', 'e', 'f','g'])
-    return nse_fno
+#     return nse_fno
 
     a=(nse_fno("BANKNIFTY"))
 #     a = json.dumps(a)
-    json_string = json.dumps(a)
-    json_value=json.loads(json_string)
-    a=json_value
-#     last_prices=round(nse_quote_ltp("BANKNIFTY"))
-#     global open1,last_prices,high,low,strike
-    
-#     yf.pdr_override()
-#     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
-    
-#     json_string = json.dumps(nse_df)
+#     json_string = json.dumps(a)
 #     json_value=json.loads(json_string)
-#     nse_df=json_value
-#     live_data =nse_df.tail(1)
-#     open1=live_data['Open'][0].astype(int).round()
-#     high =live_data['High'][0].astype(int).round()
-#     low=live_data['Low'][0].astype(int).round()
-#     last_prices=live_data['Close'][0].astype(int).round()
-# #     print(open,high, low , close)
-# #     print(live_data)
+#     a=json_value
+    last_prices=round(nse_quote_ltp("BANKNIFTY"))
+    global open1,last_prices,high,low,strike
     
-# #     price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
+    yf.pdr_override()
+    nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
     
-# #     open1=price['openPrice']
-# #     last_prices=round(price['lastPrice'])
-# #     high=price['highPrice']
-# #     low=price['lowPrice']
+    json_string = json.dumps(nse_df)
+    json_value=json.loads(json_string)
+    nse_df=json_value
+    live_data =nse_df.tail(1)
+    open1=live_data['Open'][0].astype(int).round()
+    high =live_data['High'][0].astype(int).round()
+    low=live_data['Low'][0].astype(int).round()
+    last_prices=live_data['Close'][0].astype(int).round()
+#     print(open,high, low , close)
+#     print(live_data)
+    
+#     price=(nse_quote_meta("BANKNIFTY","latest","Fut"))
+    
+#     open1=price['openPrice']
+#     last_prices=round(price['lastPrice'])
+#     high=price['highPrice']
+#     low=price['lowPrice']
 # #     print(open1,high,low,last_prices)
     
     exp=list(set(a['expiryDates']))
