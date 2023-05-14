@@ -2,10 +2,14 @@ from nsepython import nse_fno
 import streamlit as st
 import yfinance as yf
 from pandas_datareader import data as pdr 
-nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
-yf.pdr_override()
-live_data =nse_df.tail(1)
-st.markdown(live_data)
+# nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m') 
+# from yahoo_finance import Share
+ticker = yf.download("RELIANCE.NS", start= '2022-01-01', end = '2023-01-01')
+
+
+# yf.pdr_override()
+# live_data =nse_df.tail(1)
+st.markdown(ticker)
 
 # print(nse_fno('''BANKNIFTY'''))
 #from nsepython import *
