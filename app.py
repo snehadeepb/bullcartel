@@ -1,7 +1,7 @@
-# from nsepython import nse_fno
+from nsepython import nse_fno
 import streamlit as st
 
-st.markdown("HELLO")
+st.markdown(nse_fno('BANKNIFTY'))
 
 # print(nse_fno('''BANKNIFTY'''))
 #from nsepython import *
