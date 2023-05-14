@@ -27,8 +27,8 @@ def get_data():
 #     json_string = json.dumps(a)
 #     json_value=json.loads(json_string)
 #     a=json_value
-    last_prices=round(nse_quote_ltp("BANKNIFTY"))
-    global open1,last_prices,high,low,strike
+#     last_prices=round(nse_quote_ltp("BANKNIFTY"))
+#     global open1,last_prices,high,low,strike
     
     yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
