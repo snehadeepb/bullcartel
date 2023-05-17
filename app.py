@@ -28,7 +28,7 @@ def get_data():
     
     yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
-    global open1,last_prices,high,low,strike,time
+    global open1,last_prices,high,low,strike
     
 #     json_string = json.dumps(nse_df)
 #     json_value=json.loads(json_string)
@@ -39,9 +39,7 @@ def get_data():
     high =live_data['High'][0].astype(int).round()
     low=live_data['Low'][0].astype(int).round()
     last_prices=live_data['Close'][0].astype(int).round()
-    time=live_data.index
-    time=(pd.Timestamp(time[0]).today())
-
+   
     
 #     print(open1,high, low , last_prices)
 #     print(live_data)
@@ -100,7 +98,7 @@ def get_info(dataset):
     pcr= dataset['put change op'].sum()/dataset['call change op'].sum()
     cal_per= dataset['% change op'].mean()      #datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p') time shoude change
     put_per= dataset['% change op put'].mean()
-    new_row={'time':time ,'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': round(open1),'high':round(high),'low':round(low),'close':round(last_prices)}
+    new_row={'time':datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S') ,'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': round(open1),'high':round(high),'low':round(low),'close':round(last_prices)}
 #     df = df.append(new_row,ignore_index=True, verify_integrity=False, sort=None)
     pcr_dataset=pd.DataFrame(new_row,index=[0])
     deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
