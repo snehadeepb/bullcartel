@@ -14,6 +14,8 @@ import warnings
 warnings.filterwarnings("ignore")
 from pandas_datareader import data as pdr #0.10.0
 import yfinance as yf  #0.2.18
+from streamlit.report_thread import add_report_ctx
+from streamlit.server.server import Server
 
 
 def get_data():
@@ -123,6 +125,28 @@ def ploting():
         return dataset,final
 
 final = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per','time'])
+# new code
+refresh_interval = 60  # Refresh every 60 seconds
+
+# Use st.set_page_config to set the page refresh rate
+st.set_page_config(
+    page_title="Auto Refresh Example",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    refresh_interval=refresh_interval,
+)
+
+# Define a Streamlit callback function that triggers the page to rerun
+def rerun():
+    ctx = get_report_ctx()
+    server = Server.get_current()
+    server._session_manager.report_rerun(
+        ctx.session_id,
+        ctx.client,
+        ctx.request_queue,
+        ctx.request_queue_lock,
+        ctx.enqueue_request,
+    )
 
 
 if __name__=='__main__':
@@ -162,6 +186,8 @@ if __name__=='__main__':
         fig.autofmt_xdate(rotation=70)
         p3.pyplot(fig)
         time.sleep(3*60) # how to the start again code check upper condition min * sec
+        add_report_ctx(rerun)
+#         st.write(f"Auto-refreshing every {refresh_interval} seconds.")
         p1.empty() # then clean all data frame 
         p2.empty()
         p3.empty()
