@@ -103,12 +103,20 @@ def get_info(dataset):
     new_row={'time':live_time ,'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': round(live_open1),'high':round(live_high),'low':round(live_low),'close':round(last_prices)}
 #     df = df.append(new_row,ignore_index=True, verify_integrity=False, sort=None)
     pcr_dataset=pd.DataFrame(new_row,index=[0])
-    deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
+#     deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
+#     deta = Deta(deta_key)
+#     db = deta.Base("bullcartal1")
+#     def insert_user(row):
+#          return db.put(row)
+#     insert_user(new_row)
+    deta_key="d0mbmawwue1_vDAYaDS1qJR7ZWinqFrgXHg7BRusgoMY"
     deta = Deta(deta_key)
-    db = deta.Base("bullcartal1")
-    def insert_user(row):
-         return db.put(row)
-    insert_user(new_row)
+    db = deta.Base("raj")
+    def insert_user(o_df):
+       for i in o_df.index:
+          db.put(o_df.loc[i].to_dict())
+    insert_user(new_df)
+
     return pcr_dataset 
 
 def ploting():
