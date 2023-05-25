@@ -97,7 +97,7 @@ def get_info(dataset):
     pcr= dataset['put change op'].sum()/dataset['call change op'].sum()
     cal_per= dataset['% change op'].mean()      #datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p') time shoude change
     put_per= dataset['% change op put'].mean()
-    new_row={'time':datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S') ,'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': (live_open1),'high':(live_high),'low':(live_low),'close':round(last_prices)}
+    new_row={'time':datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S') ,'value':value, 'pcr':round(pcr,2), 'cal_per':round(cal_per,2), 'put_per':round(put_per,2),'open': round(live_open1),'high':round(live_high),'low':round(live_low),'close':round(last_prices)}
 #     df = df.append(new_row,ignore_index=True, verify_integrity=False, sort=None)
     pcr_dataset=pd.DataFrame(new_row,index=[0])
     deta_key="d0iqnepq4nn_BgRSHUYswKQEwYxUJEFnFgH4FTfwm8EH"
