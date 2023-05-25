@@ -113,9 +113,8 @@ def get_info(dataset):
     deta = Deta(deta_key)
     db = deta.Base("raj")
     def insert_user(o_df):
-       for i in o_df.index:
-          db.put(o_df.loc[i].to_dict())
-    insert_user(new_df)
+        db.put(o_df)
+    insert_user(new_row)
 
     return pcr_dataset 
 
