@@ -160,6 +160,7 @@ if __name__=='__main__':
         p1=st.empty()
         p2=st.empty()
         p3=st.empty()
+        p4=st.empty()
 #         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
 # #         final=np.array(final,column=['value', 'pcr', 'cal_per','put_per','time'])
 #         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1,)) # row highlight
@@ -175,7 +176,10 @@ if __name__=='__main__':
         ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
         fig.autofmt_xdate(rotation=70)
         p3.pyplot(fig)
+        pred = pickle.load(open('arima.pkl', 'rb'))
+        p4.write()
         time.sleep(5*60) # how to the start again code check upper condition min * sec
         p1.empty() # then clean all data frame 
         p2.empty()
         p3.empty()
+        p4.empty()
