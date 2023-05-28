@@ -16,12 +16,12 @@ from pandas_datareader import data as pdr #0.10.0
 import yfinance as yf  #0.2.18
 
 def get_data():
-    while True:
-      try:
-        a=(nse_fno("BANKNIFTY"))
-      except:
-        continue
-        time.sleep(20)
+#     while True:
+#       try:
+      a=(nse_fno("BANKNIFTY"))
+#       except:
+#         continue
+#         time.sleep(20)
 #     a=(nse_fno("BANKNIFTY"))
 #     a = json.dumps(a)
 #     json_string = json.dumps(a)
