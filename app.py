@@ -18,7 +18,7 @@ import yfinance as yf  #0.2.18
 def get_data():
 #     while True:
 #       try:
-      a=(nse_fno("BANKNIFTY"))
+     
 #       except:
 #         continue
 #         time.sleep(20)
@@ -29,7 +29,7 @@ def get_data():
 #     a=json_value
 #     last_prices=round(nse_quote_ltp("BANKNIFTY"))
     
-    
+    a=(nse_fno("BANKNIFTY"))
     yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
     nse_df.index=[str(i).split('+')[0] for i in nse_df.index]
@@ -160,7 +160,7 @@ if __name__=='__main__':
         p1=st.empty()
         p2=st.empty()
         p3=st.empty()
-        p4=st.empty()
+#         p4=st.empty()
 #         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
 # #         final=np.array(final,column=['value', 'pcr', 'cal_per','put_per','time'])
 #         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1,)) # row highlight
@@ -176,10 +176,10 @@ if __name__=='__main__':
         ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
         fig.autofmt_xdate(rotation=70)
         p3.pyplot(fig)
-        pred = pickle.load(open('arima.pkl', 'rb'))
-        p4.write()
+#         pred = pickle.load(open('arima.pkl', 'rb'))
+#         p4.write()
         time.sleep(5*60) # how to the start again code check upper condition min * sec
         p1.empty() # then clean all data frame 
         p2.empty()
         p3.empty()
-        p4.empty()
+#         p4.empty()
