@@ -16,7 +16,7 @@ from pandas_datareader import data as pdr #0.10.0
 import yfinance as yf  #0.2.18
 
 def get_data():
-    a1=None
+    a=None
     while a==None:
       try:
         a=(nse_fno("BANKNIFTY"))
