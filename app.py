@@ -16,20 +16,15 @@ from pandas_datareader import data as pdr #0.10.0
 import yfinance as yf  #0.2.18
 
 def get_data():
-#     while True:
-#       try:
-     
-#       except:
-#         continue
-#         time.sleep(20)
-#     a=(nse_fno("BANKNIFTY"))
-#     a = json.dumps(a)
-#     json_string = json.dumps(a)
-#     json_value=json.loads(json_string)
-#     a=json_value
-#     last_prices=round(nse_quote_ltp("BANKNIFTY"))
+    a1=None
+    while a==None:
+      try:
+        a=(nse_fno("BANKNIFTY"))
+        break
+      except:
+        time.sleep(60) 
     
-    a=(nse_fno("BANKNIFTY"))
+#     a=(nse_fno("BANKNIFTY"))
     yf.pdr_override()
     nse_df = pdr.get_data_yahoo("^NSEBANK", period='1d', interval='5m')
     nse_df.index=[str(i).split('+')[0] for i in nse_df.index]
