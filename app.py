@@ -147,7 +147,7 @@ def forecasting():
     future = model_fit.forecast(11)
     future=np.round(future.values,2)
     fig = px.line(future, text=future)
-    fig.update_layout(xaxis_title='Forecasting',title='Line plot banknifty forecast')
+    fig.update_layout(xaxis_title='Forecasting',title='Line plot banknifty forecast',yaxis_title='banknifty',)
     return fig
 
     
@@ -196,10 +196,8 @@ if __name__=='__main__':
         result=st.button('Click here')
         st.write(result)
         if result:
-            st.write(':smile:')
             p4.write(forecasting())
-            
-          
+            st.write(':smile:')
 #         p4.write(forecasting())
         time.sleep(5*60) # how to the start again code check upper condition min * sec
         p1.empty() # then clean all data frame 
