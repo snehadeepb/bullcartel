@@ -14,6 +14,8 @@ import warnings
 warnings.filterwarnings("ignore")
 from pandas_datareader import data as pdr #0.10.0
 import yfinance as yf  #0.2.18
+import plotly.express as px
+from statsmodels.tsa.arima.model import ARIMA
 
 def get_data():
     a=None
@@ -130,6 +132,25 @@ def ploting():
         final=pd.concat([final,main1],ignore_index=True)
         
         return dataset,final
+def forecasting():
+    deta_key="d0mbmawwue1_vDAYaDS1qJR7ZWinqFrgXHg7BRusgoMY"
+    deta = Deta(deta_key)
+    db = deta.Base("raj")
+    ml_data=db.fetch(query=None, limit=None, last=None)
+    ml_data=ml_data.items
+    df=ml_data
+    df=pd.DataFrame(df)
+    df=df.drop(['put','key'],axis=1)
+    df =df.set_index('time' )
+    model=ARIMA(df['close'],order=(1,3,2))
+    model_fit = model.fit()
+    future = model_fit.forecast(11)
+    future=np.round(future.values,2)
+    fig = px.line(future, text=future)
+    fig.update_layout(xaxis_title='Forecasting',title='Line plot banknifty forecast')
+    return fig
+
+    
 
 final = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per','time'])
 
@@ -155,7 +176,7 @@ if __name__=='__main__':
         p1=st.empty()
         p2=st.empty()
         p3=st.empty()
-#         p4=st.empty()
+        p4=st.empty()
 #         p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
 # #         final=np.array(final,column=['value', 'pcr', 'cal_per','put_per','time'])
 #         p2.dataframe(final.style.highlight_max(['cal_per','put_per'],axis=1,)) # row highlight
@@ -171,10 +192,9 @@ if __name__=='__main__':
         ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
         fig.autofmt_xdate(rotation=70)
         p3.pyplot(fig)
-#         pred = pickle.load(open('arima.pkl', 'rb'))
-#         p4.write()
+        p4.write(forecasting())
         time.sleep(5*60) # how to the start again code check upper condition min * sec
         p1.empty() # then clean all data frame 
         p2.empty()
         p3.empty()
-#         p4.empty()
+        p4.empty()
