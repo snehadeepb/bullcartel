@@ -196,8 +196,9 @@ if __name__=='__main__':
         result=st.button('Click here')
         st.write(result)
         if result:
-            p4.write(forecasting())
             st.write(':smile:')
+            p4.write(forecasting())
+           
 #         p4.write(forecasting())
         time.sleep(5*60) # how to the start again code check upper condition min * sec
         p1.empty() # then clean all data frame 
