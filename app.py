@@ -170,7 +170,7 @@ if __name__=='__main__':
              PUT % INCREASE MEANS MARKET GOES UP
              """)    
     st.title('banknifty forecast ')
-    result=st.button('Click here', key=co)
+    result=st.button('Click here', key=co,type= "primary" )
     co+=1
     st.write(result)
     while True:
