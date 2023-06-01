@@ -193,7 +193,9 @@ if __name__=='__main__':
         fig.autofmt_xdate(rotation=70)
         p3.pyplot(fig)
         st.title('banknifty forecast ')
-        result=st.button('Click here', key="<uniquevalueofsomesort>")
+        co=0
+        result=st.button('Click here', key=co)
+        co+=1
         st.write(result)
         if result:
             st.write(':smile:')
