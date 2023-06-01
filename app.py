@@ -170,7 +170,7 @@ if __name__=='__main__':
              PUT % INCREASE MEANS MARKET GOES UP
              """)    
     st.title('banknifty forecast ')
-    result=st.button('Click here', key=co,type= "primary" )
+    result=st.button('Click here', key=co,type= "primary" ,on_click =forecasting())
     co+=1
     st.write(result)
     while True:
@@ -191,7 +191,7 @@ if __name__=='__main__':
 
         if result:
             st.write(':smile:')
-            p4.write(forecasting())
+#             p4.write(forecasting())
            
 #         p4.write(forecasting())
         time.sleep(5*60) # how to the start again code check upper condition min * sec
