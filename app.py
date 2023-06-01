@@ -24,7 +24,7 @@ def get_data():
         a=(nse_fno("BANKNIFTY"))
         break
       except:
-        time.sleep(60) 
+        time.sleep(40) 
     
 #     a=(nse_fno("BANKNIFTY"))
     yf.pdr_override()
