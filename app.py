@@ -169,6 +169,10 @@ if __name__=='__main__':
     st.markdown(""" CALL % INCREASE MEANS MARKET GOES DOWN  
              PUT % INCREASE MEANS MARKET GOES UP
              """)    
+    st.title('banknifty forecast ')
+    result=st.button('Click here', key=co)
+    co+=1
+    st.write(result)
     while True:
         current_time=datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
         
@@ -184,11 +188,7 @@ if __name__=='__main__':
         ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
         fig.autofmt_xdate(rotation=70)
         p3.pyplot(fig)
-        st.title('banknifty forecast ')
-        
-        result=st.button('Click here', key=co)
-        co+=1
-        st.write(result)
+
         if result:
             st.write(':smile:')
             p4.write(forecasting())
