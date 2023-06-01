@@ -151,9 +151,9 @@ def forecasting():
     return fig
 
     
-
+global co
 final = pd.DataFrame(columns=['value', 'pcr', 'cal_per','put_per','time'])
-
+co=0
 
 if __name__=='__main__':
     
@@ -193,7 +193,7 @@ if __name__=='__main__':
         fig.autofmt_xdate(rotation=70)
         p3.pyplot(fig)
         st.title('banknifty forecast ')
-        co=0
+        
         result=st.button('Click here', key=co)
         co+=1
         st.write(result)
