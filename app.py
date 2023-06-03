@@ -167,8 +167,8 @@ current_time =datetime.datetime.now(timezone("Asia/Kolkata")).strftime("%H:%M:%S
 if __name__=='__main__':
     
     st.title('WELCOME BULLS CARTEL')
-    current_date_web =strftime("%d %b %Y", gmtime()),datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
-    st.markdown(f"as at {current_date_web}")
+#     current_date_web =strftime("%d %b %Y", gmtime()),datetime.now(timezone("Asia/Kolkata")).strftime('%I.%M %p')
+    st.markdown(f"as at {today,current_time}")
     option= st.selectbox(
     'How would you like to be contacted?',
     ('5', '10', '15')) 
