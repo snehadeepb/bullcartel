@@ -148,7 +148,7 @@ def forecasting():
     future=np.round(future.values,2)
     fig = px.line(future, text=future)
     fig.update_layout(xaxis_title='Forecasting',title='Line plot banknifty forecast',yaxis_title='banknifty',)
-    arima_fig=plt.display(fig)
+    arima_fig=fig
     return arima_fig
 
     
