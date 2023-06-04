@@ -182,36 +182,37 @@ if __name__=='__main__':
     co+=1
     st.write(result)
     while True:
-        if str(start_time) <= current_time <= str(end_time) and weekday not in (5,6):
-            dataset,final=ploting()
-            p1=st.empty()
-            p2=st.empty()
-            p3=st.empty()
-            p4=st.empty()
-            p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
-            p2.write(final[:100])
-            fig, ax = plt.subplots(figsize=(6, 2)) 
-            ax.plot(final['time'],final['pcr'])
-            ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
-            fig.autofmt_xdate(rotation=70)
-            p3.pyplot(fig)
+        
+#         if str(start_time) <= current_time <= str(end_time) and weekday not in (5,6):
+        dataset,final=ploting()
+        p1=st.empty()
+        p2=st.empty()
+        p3=st.empty()
+        p4=st.empty()
+        p1.dataframe(dataset.style.highlight_max(['% change op put','% change op'],axis=0)) #Column hightlight 
+        p2.write(final[:100])
+        fig, ax = plt.subplots(figsize=(6, 2)) 
+        ax.plot(final['time'],final['pcr'])
+        ax.axhline(y=0, color='black', linestyle='solid') # 0 line graph
+        fig.autofmt_xdate(rotation=70)
+        p3.pyplot(fig)
 
-            if result:
-                st.write(':smile:')
-                p4.write(forecasting())
+        if result:
+            st.write(':smile:')
+            p4.write(forecasting())
 
-    #         p4.write(forecasting())
-            time.sleep(5*60) # how to the start again code check upper condition min * sec
-            p1.empty() # then clean all data frame 
-            p2.empty()
-            p3.empty()
-            p4.empty()
-        else:
-            now = datetime.datetime.now()
-            # print(now)
-            target_time = datetime.datetime(now.year, now.month, now.day, 9, 15, 0) + datetime.timedelta(days=1)
-            # print(target_time)
-            wait_seconds = (target_time - now).total_seconds()
-            # print(wait_seconds)
-            st.markdown('Today, the stock market is closed. We kindly request you to join us tomorrow at 9:15 am when trading resumes. Thank you for your understanding.')
-            time.sleep(wait_seconds)
+#         p4.write(forecasting())
+        time.sleep(5*60) # how to the start again code check upper condition min * sec
+        p1.empty() # then clean all data frame 
+        p2.empty()
+        p3.empty()
+        p4.empty()
+#         else:
+#             now = datetime.datetime.now()
+#             # print(now)
+#             target_time = datetime.datetime(now.year, now.month, now.day, 9, 15, 0) + datetime.timedelta(days=1)
+#             # print(target_time)
+#             wait_seconds = (target_time - now).total_seconds()
+#             # print(wait_seconds)
+#             st.markdown('Today, the stock market is closed. We kindly request you to join us tomorrow at 9:15 am when trading resumes. Thank you for your understanding.')
+#             time.sleep(wait_seconds)
