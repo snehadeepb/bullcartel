@@ -60,7 +60,7 @@ def get_data():
 # #     print(open1,high,low,last_prices)
     
     exp=list(set(a['expiryDates']))
-    exp.sort(key = lambda date: datetime.datetime.strptime(sdate, '%d-%b-%Y')) 
+    exp.sort(key = lambda date: datetime.datetime.strptime(date, '%d-%b-%Y')) 
     if last_prices%100>50:
         x=(last_prices-last_prices%100+100)
         strike=[x-200,x-100,x,x+100,x+200]
