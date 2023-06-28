@@ -104,7 +104,7 @@ def get_data():
                 if  ll < lmax:
                     dict_list[lname] += [padel] * (lmax - ll)
             return dict_list
-    out = pad_dict_list(d, 0)
+            out = pad_dict_list(d, 0)
     x=out.astype(float).round(2)
     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
     return x
