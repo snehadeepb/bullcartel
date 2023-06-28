@@ -91,9 +91,20 @@ def get_data():
                 d['put vwap'].append(i['marketDeptOrderBook']['tradeInfo']['vmap'])
 
     out=pd.json_normalize(d)
-    
-    out=out.explode(list(out.columns)).reset_index(drop = True)
     out.fillna(0,inplace=True)
+    try:
+        out=out.explode(list(out.columns)).reset_index(drop = True)
+    except:
+        def pad_dict_list(dict_list, padel):
+            lmax = 0
+            for lname in dict_list.keys():
+                lmax = max(lmax, len(dict_list[lname]))
+            for lname in dict_list.keys():
+                ll = len(dict_list[lname])
+                if  ll < lmax:
+                    dict_list[lname] += [padel] * (lmax - ll)
+            return dict_list
+    out = pad_dict_list(d, 0)
     x=out.astype(float).round(2)
     x.sort_values("strike", axis = 0, ascending = True,inplace = True)
     return x
